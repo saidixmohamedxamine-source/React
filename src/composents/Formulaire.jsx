@@ -15,6 +15,25 @@ function Formulaire() {
     "Laâyoune-Sakia El Hamra",
     "Dakhla-Oued Ed-Dahab",
   ];
+  const memberShipLevels = [
+    {
+      id: 1,
+      level: "Bronze",
+    },
+    {
+      id: 2,
+      level: "Silver",
+    },
+    {
+      id: 3,
+      level: "Gold",
+    },
+    {
+      id: 4,
+      level: "Platinum",
+    },
+  ];
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [streetAdress, setStreetAdress] = useState("");
@@ -22,6 +41,10 @@ function Formulaire() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [phoneNum, setPhoneNum] = useState(0);
+  const [adressEmail, setAdressEmail] = useState("");
+  const [memberShipLevel, setMemberShipLevel] = useState("");
+
   return (
     <form action="">
       <label htmlFor="firstName">First Name</label>
@@ -91,13 +114,44 @@ function Formulaire() {
       <label htmlFor="zipCode">Zip Code</label>
       <input
         type="password"
-        list="stateList"
         value={zipCode}
         onChange={(e) => {
           setZipCode(e.target.value);
         }}
         name="zipCode"
       />
+      <label htmlFor="phoneNum">Phone Number</label>
+      <input
+        type="tel"
+        value={phoneNum}
+        onChange={(e) => {
+          setPhoneNum(e.target.value);
+        }}
+        name="phoneNum"
+      />
+      <label htmlFor="adressEmail">Adress Email</label>
+      <input
+        type="text"
+        value={adressEmail}
+        onChange={(e) => {
+          setAdressEmail(e.target.value);
+        }}
+        name="adressEmail"
+      />
+      {memberShipLevels.map((level, index) => {
+        return (
+          <div key={index}>
+            <input
+              type="radio"
+              value={level.level}
+              name={level.level}
+              checked={memberShipLevel === level.level}
+              onChange={(e) => setMemberShipLevel(e.target.value)}
+            />
+            <label htmlFor={level.level}>{level.level}</label>
+          </div>
+        );
+      })}
     </form>
   );
 }
